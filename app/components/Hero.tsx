@@ -9,7 +9,7 @@ export default function Hero() {
           </div>
           
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Natanael
+            Da Silva Marcos Natanael
           </h1>
           <p className="text-xl text-gray-600 mb-2">
             Analista en Sistemas & Desarrollador Full Stack
