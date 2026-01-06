@@ -1,21 +1,24 @@
+import Link from 'next/link'
+
 export default function Header() {
   return (
-    <header className="bg-white shadow-sm">
+    <header className="fixed top-0 w-full bg-white/90 backdrop-blur-sm z-50 border-b">
       <nav className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-gray-800">
-            Da Silva Marcos Natanael
-          </h1>
-          <div className="space-x-4">
-            <a href="#proyectos" className="text-gray-600 hover:text-blue-600">
+          <Link href="/" className="text-xl font-bold text-gray-900">
+            N<span className="text-blue-600">.</span>
+          </Link>
+          
+          <div className="flex gap-6">
+            <Link href="#proyectos" className="text-sm font-medium text-gray-600 hover:text-gray-900">
               Proyectos
-            </a>
-            <a href="#habilidades" className="text-gray-600 hover:text-blue-600">
-              Habilidades
-            </a>
-            <a href="#contacto" className="text-gray-600 hover:text-blue-600">
+            </Link>
+            <Link href="#skills" className="text-sm font-medium text-gray-600 hover:text-gray-900">
+              Skills
+            </Link>
+            <Link href="#contacto" className="text-sm font-medium text-gray-600 hover:text-gray-900">
               Contacto
-            </a>
+            </Link>
           </div>
         </div>
       </nav>
