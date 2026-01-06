@@ -10,7 +10,7 @@ export default function Home() {
             Analista en Sistemas de Computación
           </h1>
           <p className="text-xl text-gray-600 mb-8">
-            Especializado en Laravel, Java, Python y sistemas escalables
+            Desarrollador en Laravel, Java, Python y sistemas escalables
           </p>
         <a 
             href="#contacto" 
