@@ -20,7 +20,8 @@ const skillCategories = [
       { name: "JavaScript", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" },
       { name: "TypeScript", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg" },  
       { name: "Tailwind CSS", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" },
-      { name: "HTML5/CSS3", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" }
+      { name: "HTML5/CSS3", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" },
+      { name: "React", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" }
     ],
     color: "emerald"
   },
@@ -28,7 +29,8 @@ const skillCategories = [
     category: "Frameworks Principales",
     skills: [
       { name: "Laravel", imageUrl: "https://laravel.com/img/logomark.min.svg" },
-      { name: "Spring Boot", imageUrl: "https://spring.io/img/spring.svg" }
+      { name: "Spring Boot", imageUrl: "https://spring.io/img/spring.svg" },
+      { name: "Next.js", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/8/8e/Nextjs-logo.svg" }
     ],
     color: "purple"
   },
@@ -133,7 +135,7 @@ export default function Skills() {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {skillCategories.map((cat) => (
-            <div key={cat.category} className="bg-white rounded-lg p-6 border border-gray-100 shadow-sm">
+            <div key={cat.category} className="bg-gray-50 rounded-lg p-6 border border-gray-300 shadow-md ">
               {/* Header simple */}
               <h3 className={`text-lg font-bold mb-6 ${getColorClasses(cat.color, "text")}`}>
                 {cat.category}
@@ -266,7 +268,7 @@ export default function Skills() {
                 Conocimientos en Ingeniería de Software
               </h3>
               <p className="text-gray-700 mb-6">
-                Con formación en análisis de sistemas y experiencia práctica, aplico metodologías estructuradas 
+                Con la formación en análisis de sistemas y experiencia práctica, uso metodologías estructuradas 
                 para el desarrollo de software de calidad, desde la planificación hasta la implementación.
               </p>
               
@@ -295,8 +297,7 @@ export default function Skills() {
                   "Fase de Diseño",
                   "Testing y Control de Calidad",
                   "Documentación Técnica",
-                  "Gestión de Proyectos",
-                  "Auditoría de Sistemas"
+                  "Gestión de Proyectos"
                 ].map((skill) => (
                   <div key={skill} className="flex items-center gap-3 group cursor-default">
                     <div className="w-2 h-2 bg-emerald-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>

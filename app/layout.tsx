@@ -7,7 +7,7 @@ import Footer from '@/components/Footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Natanael | Full Stack Developer',
+  title: 'Da Silva Marcos Natanael | Analista de Sistemas',
   description: 'Analista en Sistemas especializado en Laravel, Java y sistemas escalables',
 }
 
