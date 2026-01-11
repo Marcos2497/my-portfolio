@@ -19,6 +19,9 @@ export default function Header() {
             <Link href="#contacto" className="text-sm font-medium text-gray-600 hover:text-gray-900">
               Contacto
             </Link>
+            <Link href="#sobre mí" className="text-sm font-medium text-gray-600 hover:text-gray-900">
+              Sobre mí
+            </Link>
           </div>
         </div>
       </nav>
