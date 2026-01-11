@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from 'react';
+
 const skillCategories = [
   {
     category: "Backend & APIs",
@@ -7,7 +9,7 @@ const skillCategories = [
       { name: "Python", imageUrl: "https://images.icon-icons.com/2415/PNG/512/python_original_logo_icon_146381.png" },
       { name: "PHP", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/PHP-logo.svg/1200px-PHP-logo.svg.png" },
       { name: "Node.js", imageUrl: "https://www.monoforms.com/sites/default/files/node.png" },
-      {name: "Java", imageUrl: "https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg" }
+      { name: "Java", imageUrl: "https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg" }
     ],
     color: "blue"
   },
@@ -16,7 +18,7 @@ const skillCategories = [
     skills: [
       { name: "Livewire", imageUrl: "https://avatars.githubusercontent.com/u/51960834?s=400&v=4" },
       { name: "JavaScript", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" },
-      {name: "TypeScript", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg" },  
+      { name: "TypeScript", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg" },  
       { name: "Tailwind CSS", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" },
       { name: "HTML5/CSS3", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" }
     ],
@@ -48,26 +50,13 @@ const skillCategories = [
       { name: "Vercel", imageUrl: "https://assets.vercel.com/image/upload/q_auto/front/favicon/vercel/57x57.png" }
     ],
     color: "indigo"
-  },
-  {
-    category: "Metodologías & Ingeniería",
-    skills: [
-      { name: "SCRUM", imageUrl: "https://user-images.githubusercontent.com/68760595/164306020-120e8664-cb5b-459a-80a3-99e13b057b52.png" },
-      { name: "Unified Process", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/UML_logo.svg/1200px-UML_logo.svg.png" },
-      { name: "Arquitectura", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Socrates-color.svg/1200px-Socrates-color.svg.png" },
-      { name: "Testing", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Unit_testing_icon.svg/1200px-Unit_testing_icon.svg.png" },
-      { name: "Código Limpio", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/480px-JavaScript-logo.png" },
-      { name: "Documentación", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Markdown-mark.svg/1200px-Markdown-mark.svg.png" }
-    ],
-    color: "red"
+    
   }
 ];
 
-
-import { useState } from 'react';
-
 export default function Skills() {
   const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
+  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
 
   const getColorClasses = (color: string, type = "bg") => {
     const base: Record<string, string> = {
@@ -88,6 +77,39 @@ export default function Skills() {
         indigo: "text-indigo-700",
         red: "text-red-700"
       }[color] || "text-gray-700";
+    }
+
+    if (type === "gradient") {
+      return {
+        blue: "from-blue-50 to-blue-100",
+        emerald: "from-emerald-50 to-emerald-100", 
+        purple: "from-purple-50 to-purple-100",
+        amber: "from-amber-50 to-amber-100",
+        indigo: "from-indigo-50 to-indigo-100",
+        red: "from-red-50 to-red-100"
+      }[color] || "from-gray-50 to-gray-100";
+    }
+    
+    if (type === "ring") {
+      return {
+        blue: "ring-blue-200",
+        emerald: "ring-emerald-200", 
+        purple: "ring-purple-200",
+        amber: "ring-amber-200",
+        indigo: "ring-indigo-200",
+        red: "ring-red-200"
+      }[color] || "ring-gray-200";
+    }
+    
+    if (type === "shadow") {
+      return {
+        blue: "shadow-blue-200/30",
+        emerald: "shadow-emerald-200/30", 
+        purple: "shadow-purple-200/30",
+        amber: "shadow-amber-200/30",
+        indigo: "shadow-indigo-200/30",
+        red: "shadow-red-200/30"
+      }[color] || "shadow-gray-200/30";
     }
     
     return base[color] || "border-gray-200";
@@ -111,40 +133,123 @@ export default function Skills() {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {skillCategories.map((cat) => (
-            <div key={cat.category} className="bg-white rounded-lg p-6 border border-gray-100">
+            <div key={cat.category} className="bg-white rounded-lg p-6 border border-gray-100 shadow-sm">
               {/* Header simple */}
               <h3 className={`text-lg font-bold mb-6 ${getColorClasses(cat.color, "text")}`}>
                 {cat.category}
               </h3>
               
-              {/* Grid de tecnologías - diseño minimalista */}
+              {/* Grid de tecnologías - con efectos de hover */}
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 {cat.skills.map((skill) => {
                   const hasError = imageErrors[skill.name];
+                  const isHovered = hoveredSkill === skill.name;
+                  
                   return (
                     <div 
                       key={skill.name} 
-                      className="flex flex-col items-center justify-center p-4 rounded-lg border border-gray-200 hover:border-gray-300 transition-colors"
+                      className="relative"
+                      onMouseEnter={() => setHoveredSkill(skill.name)}
+                      onMouseLeave={() => setHoveredSkill(null)}
                     >
-                      {/* Contenedor para imagen - con fallback */}
-                      <div className="w-12 h-12 mb-3 flex items-center justify-center">
-                        {skill.imageUrl && !hasError ? (
-                          <img 
-                            src={skill.imageUrl} 
-                            alt={skill.name}
-                            className="w-10 h-10 object-contain"
-                            onError={() => handleImageError(skill.name)}
-                            loading="lazy"
-                          />
-                        ) : (
-                          <div className="w-10 h-10 flex items-center justify-center bg-gray-100 rounded text-sm font-medium text-gray-500">
-                            {skill.name.substring(0, 2)}
+                      <div 
+                        className={`
+                          flex flex-col items-center justify-center p-4 
+                          rounded-xl border-2 border-transparent
+                          bg-gradient-to-br from-white to-gray-50
+                          transition-all duration-300 ease-out
+                          hover:scale-105 hover:-translate-y-1
+                          ${isHovered ? `shadow-lg ${getColorClasses(cat.color, "shadow")}` : 'shadow-sm'}
+                          hover:border-gray-300
+                          group
+                        `}
+                      >
+                        {/* Efecto de fondo sutil al hacer hover */}
+                        <div className={`
+                          absolute inset-0 rounded-xl
+                          bg-gradient-to-br opacity-0 group-hover:opacity-100
+                          transition-opacity duration-300
+                          ${getColorClasses(cat.color, "gradient")}
+                          blur-sm
+                        `}></div>
+                        
+                        {/* Contenedor para imagen - con efectos */}
+                        <div className="relative z-10">
+                          <div className={`
+                            w-12 h-12 mb-3 flex items-center justify-center 
+                            rounded-xl bg-white p-1.5
+                            transition-all duration-300
+                            group-hover:scale-110
+                            ${isHovered ? `shadow-md ring-2 ${getColorClasses(cat.color, "ring")}` : 'shadow-sm'}
+                          `}>
+                            {skill.imageUrl && !hasError ? (
+                              <img 
+                                src={skill.imageUrl} 
+                                alt={skill.name}
+                                className="w-10 h-10 object-contain transition-transform duration-300 group-hover:scale-110"
+                                onError={() => handleImageError(skill.name)}
+                                loading="lazy"
+                              />
+                            ) : (
+                              <div className={`
+                                w-10 h-10 flex items-center justify-center 
+                                rounded-lg text-sm font-medium
+                                transition-all duration-300
+                                ${isHovered 
+                                  ? `${cat.color === 'blue' ? 'bg-blue-50 text-blue-600' : 
+                                      cat.color === 'emerald' ? 'bg-emerald-50 text-emerald-600' : 
+                                      cat.color === 'purple' ? 'bg-purple-50 text-purple-600' : 
+                                      cat.color === 'amber' ? 'bg-amber-50 text-amber-600' : 
+                                      cat.color === 'indigo' ? 'bg-indigo-50 text-indigo-600' : 
+                                      'bg-gray-50 text-gray-600'}`
+                                  : 'bg-gray-100 text-gray-500'
+                                }
+                              `}>
+                                {skill.name.substring(0, 2)}
+                              </div>
+                            )}
                           </div>
-                        )}
+                        </div>
+                        
+                        {/* Nombre de la tecnología con efecto de hover */}
+                        <span className={`
+                          relative z-10 text-sm font-medium text-center
+                          transition-all duration-300
+                          ${isHovered 
+                            ? `${cat.color === 'blue' ? 'text-blue-700 font-semibold' : 
+                                cat.color === 'emerald' ? 'text-emerald-700 font-semibold' : 
+                                cat.color === 'purple' ? 'text-purple-700 font-semibold' : 
+                                cat.color === 'amber' ? 'text-amber-700 font-semibold' : 
+                                cat.color === 'indigo' ? 'text-indigo-700 font-semibold' : 
+                                'text-gray-700 font-semibold'}`
+                            : 'text-gray-900'
+                          }
+                        `}>
+                          {skill.name}
+                        </span>
+                        
+                        {/* Efecto sutil de brillo */}
+                        <div className={`
+                          absolute inset-0 rounded-xl
+                          opacity-0 group-hover:opacity-30
+                          transition-opacity duration-300
+                          ${getColorClasses(cat.color, "gradient")}
+                        `}></div>
                       </div>
-                      <span className="text-sm font-medium text-gray-900 text-center">
-                        {skill.name}
-                      </span>
+                      
+                      {/* Punto decorativo sutil */}
+                      <div className={`
+                        absolute -top-1 -right-1 w-2 h-2 rounded-full
+                        opacity-0 group-hover:opacity-100
+                        transition-all duration-300
+                        ${cat.color === 'blue' ? 'bg-blue-400' : 
+                          cat.color === 'emerald' ? 'bg-emerald-400' : 
+                          cat.color === 'purple' ? 'bg-purple-400' : 
+                          cat.color === 'amber' ? 'bg-amber-400' : 
+                          cat.color === 'indigo' ? 'bg-indigo-400' : 
+                          'bg-gray-400'
+                        }
+                      `}></div>
                     </div>
                   );
                 })}
@@ -153,58 +258,53 @@ export default function Skills() {
           ))}
         </div>
 
-        {/* Tecnologías adicionales - diseño minimalista */}
-        <div className="mt-12 bg-gray-50 rounded-lg p-8 border border-gray-200">
-          <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">
-            Herramientas Adicionales
-          </h3>
-          
-          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-4">
-            {[
-              { name: "Open Route", short: "ORS", imageUrl: "" },
-              { name: "VMware", short: "VM", imageUrl: "" },
-              { name: "MQTT", short: "MQTT", imageUrl: "" },
-              { name: "Postman", short: "PM", imageUrl: "" },
-              { name: "Figma", short: "FG", imageUrl: "" },
-              { name: "CI/CD", short: "CD", imageUrl: "" },
-              { name: "Office", short: "OFF", imageUrl: "" },
-              { name: "GitHub", short: "GH", imageUrl: "" }
-            ].map((tech) => {
-              const hasError = imageErrors[tech.name];
-              return (
-                <div 
-                  key={tech.name}
-                  className="bg-white p-4 rounded-lg border border-gray-200 hover:border-gray-300 transition-colors flex flex-col items-center justify-center"
-                >
-                  {/* Contenedor para imagen */}
-                  <div className="w-10 h-10 mb-2 flex items-center justify-center">
-                    {tech.imageUrl && !hasError ? (
-                      <img 
-                        src={tech.imageUrl} 
-                        alt={tech.name}
-                        className="w-8 h-8 object-contain"
-                        onError={() => handleImageError(tech.name)}
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div className="w-8 h-8 flex items-center justify-center bg-gray-100 rounded text-xs font-medium text-gray-500">
-                        {tech.short}
-                      </div>
-                    )}
-                  </div>
-                  <div className="text-center">
-                    <div className="text-xs font-medium text-gray-900">{tech.name}</div>
+        {/* Sección de Ingeniería de Software y Metodologías */}
+        <div className="mt-12 bg-gradient-to-r from-blue-50 to-emerald-50 rounded-xl p-8 border border-blue-200">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                Conocimientos en Ingeniería de Software
+              </h3>
+              <p className="text-gray-700 mb-6">
+                Con formación en análisis de sistemas y experiencia práctica, aplico metodologías estructuradas 
+                para el desarrollo de software de calidad, desde la planificación hasta la implementación.
+              </p>
+              
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-gray-900 mb-2">Metodologías de Desarrollo</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {["SCRUM", "Unified Process (UP)", "Cascada"].map((method) => (
+                      <span 
+                        key={method}
+                        className="px-4 py-2 bg-white text-gray-800 text-sm font-medium rounded-lg border border-gray-300 hover:border-blue-400 hover:shadow-md transition-all hover:scale-105"
+                      >
+                        {method}
+                      </span>
+                    ))}
                   </div>
                 </div>
-              );
-            })}
-          </div>
-          
-          {/* Nota aplicada */}
-          <div className="mt-8 pt-6 border-t border-gray-200">
-            <p className="text-sm text-gray-600 text-center">
-              Experiencia aplicada en proyectos reales de logística, monitoreo energético y sistemas empresariales
-            </p>
+              </div>
+            </div>
+            
+            <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+              <h4 className="font-bold text-gray-900 mb-4 text-lg">Habilidades Complementarias</h4>
+              <div className="space-y-3">
+                {[
+                  "Análisis de Requisitos",
+                  "Fase de Diseño",
+                  "Testing y Control de Calidad",
+                  "Documentación Técnica",
+                  "Gestión de Proyectos",
+                  "Auditoría de Sistemas"
+                ].map((skill) => (
+                  <div key={skill} className="flex items-center gap-3 group cursor-default">
+                    <div className="w-2 h-2 bg-emerald-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
+                    <span className="text-gray-700 group-hover:text-gray-900 transition-colors duration-300">{skill}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
