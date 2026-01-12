@@ -14,19 +14,19 @@ export default function About() {
           <div className="lg:col-span-2">
             <div className="bg-gradient-to-br from-blue-50 to-emerald-50 rounded-2xl p-8 border border-blue-100">
               <div className="space-y-6">
+                
+                <p className="text-l text-gray-700 leading-relaxed">
+                  Recién graduado como Analista y actualmente cursando el último año de la 
+                  <strong> Licenciatura en Sistemas de Información</strong>. Mi compromiso con el trabajo, 
+                  responsabilidad y aprendizaje continuo me permiten adaptarme rápidamente a nuevas 
+                  tecnologías y metodologías.
+                </p>
+                
                 <p className="text-l text-gray-700 leading-relaxed">
                   Como <strong className="text-blue-700">Analista en Sistemas</strong> y <strong className="text-emerald-700">Desarrollador Full Stack</strong>, 
                   busco <strong>transformar desafíos empresariales en soluciones tecnológicas efectivas</strong>. 
                   Más que escribir código, me gusta entender el contexto del negocio, analizar procesos 
                   y desarrollar software que realmente optimice y mejore.
-                </p>
-                
-                <p className="text-l text-gray-700 leading-relaxed">
-                  Recién graduado como Analista y actualmente cursando el último año de la 
-                  <strong> Licenciatura en Sistemas de Información</strong>, combino formación académica 
-                  sólida con un enfoque <strong>autodidacta y proactivo</strong>. Mi compromiso con el trabajo, 
-                  responsabilidad y aprendizaje continuo me permiten adaptarme rápidamente a nuevas 
-                  tecnologías y metodologías.
                 </p>
                 
                 <div className="bg-white p-6 rounded-xl border border-blue-200 mt-6">
