@@ -54,7 +54,7 @@ export default function About() {
                   <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
                   <div>
                     <p className="font-medium text-gray-900 text-sm">Analista en Sistemas</p>
-                    <p className="text-xs text-gray-600">Graduado 2024</p>
+                    <p className="text-xs text-gray-600">Graduado 2025</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
